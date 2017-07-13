@@ -47,7 +47,16 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
-    QString file_name = file_path_;     // We as ready know the file name
+    QString file_name;
+
+    if(file_path_==""){
+        file_name = QFileDialog::getSaveFileName(this,"Open the file");
+        file_path_ = file_name;
+    } else{
+        file_name= file_path_;     // We as ready know the file name
+    }
+
+
     QFile file(file_name);
 
     if(!file.open(QFile::WriteOnly | QFile::Text)){
