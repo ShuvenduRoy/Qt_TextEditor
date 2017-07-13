@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFile>
+#include <QFileDialog>
+#include <QTextStream>
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,12 +21,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_triggered()
 {
-
+    file_path_ = "";
+    ui->textEdit->setText("");
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-
 }
 
 void MainWindow::on_actionSave_triggered()
