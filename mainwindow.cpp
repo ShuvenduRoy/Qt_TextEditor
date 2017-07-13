@@ -31,6 +31,9 @@ void MainWindow::on_actionOpen_triggered()
     QString file_name = QFileDialog::getOpenFileName(this,"Open the file");
     QFile file(file_name);
 
+    // Store the file name
+    file_path_ = file_name;
+
     if(!file.open(QFile::ReadOnly | QFile::Text)){
         QMessageBox::warning(this,"..","File not Open" );
         return;
@@ -44,12 +47,37 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
+    QString file_name = file_path_;     // We as ready know the file name
+    QFile file(file_name);
 
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::warning(this,"..","File not Open" );
+        return;
+    }
+    QTextStream out(&file);
+    QString text = ui->textEdit->toPlainText();
+    out<<text;
+    file.flush();
+    file.close();
 }
 
 void MainWindow::on_actionSave_As_triggered()
 {
+    QString file_name = QFileDialog::getSaveFileName(this,"Open the file");
+    QFile file(file_name);
 
+    //Store the new file name
+    file_path_ = file_name;
+
+    if(!file.open(QFile::WriteOnly | QFile::Text)){
+        QMessageBox::warning(this,"..","File not Open" );
+        return;
+    }
+    QTextStream out(&file);
+    QString text = ui->textEdit->toPlainText();
+    out<<text;
+    file.flush();
+    file.close();
 }
 
 void MainWindow::on_actionCut_triggered()
