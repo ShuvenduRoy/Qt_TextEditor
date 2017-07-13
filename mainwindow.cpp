@@ -28,6 +28,18 @@ void MainWindow::on_actionNew_triggered()
 void MainWindow::on_actionOpen_triggered()
 {
 
+    QString file_name = QFileDialog::getOpenFileName(this,"Open the file");
+    QFile file(file_name);
+
+    if(!file.open(QFile::ReadOnly | QFile::Text)){
+        QMessageBox::warning(this,"..","File not Open" );
+        return;
+    }
+    QTextStream in(&file);
+    QString text = in.readAll();
+
+    ui->textEdit->setText(text);
+    file.close();
 }
 
 void MainWindow::on_actionSave_triggered()
