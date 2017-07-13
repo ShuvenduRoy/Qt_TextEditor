@@ -27,6 +27,7 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
+
 }
 
 void MainWindow::on_actionSave_triggered()
